@@ -25,8 +25,8 @@ Aplicación web independiente que consume la API REST del **Sistema de Gestión 
 ### Arquitectura Cliente-Servidor
 
 ```text
-┌─────────────────────────────┐        HTTP/JSON        ┌─────────────────────────────┐
-│     APLICACIÓN CLIENTE      │ ←─────────────────────→ │    APLICACIÓN PRINCIPAL     │
+┌─────────────────────────────┐         HTTP/JSON        ┌─────────────────────────────┐
+│     APLICACIÓN CLIENTE      │  ←─────────────────────→ │    APLICACIÓN PRINCIPAL     │
 │     localhost:8081          │                          │    localhost:8080           │
 │                             │                          │                             │
 │  ClienteController          │                          │  EquipoRestController       │
