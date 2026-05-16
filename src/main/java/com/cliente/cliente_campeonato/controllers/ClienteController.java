@@ -1,5 +1,6 @@
 package com.cliente.cliente_campeonato.controllers;
 
+import com.cliente.cliente_campeonato.models.CampeonatoDTO;
 import com.cliente.cliente_campeonato.models.EquipoDTO;
 import com.cliente.cliente_campeonato.services.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,14 @@ public class ClienteController {
         return "index";
     }
     
-    // Mostrar formulario de búsqueda
+    // Mostrar formulario de búsqueda con listas desplegables
     @GetMapping("/buscar")
-    public String mostrarFormularioBusqueda() {
+    public String mostrarFormularioBusqueda(Model model) {
+        List<String> ciudades = apiService.listarCiudades();
+        List<CampeonatoDTO> campeonatos = apiService.listarCampeonatos();
+        
+        model.addAttribute("ciudades", ciudades);
+        model.addAttribute("campeonatos", campeonatos);
         return "buscarEquipos";
     }
     

@@ -1,11 +1,12 @@
 package com.cliente.cliente_campeonato.services;
 
+import com.cliente.cliente_campeonato.models.CampeonatoDTO;
 import com.cliente.cliente_campeonato.models.EquipoDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+
 import java.util.List;
 
 @Service
@@ -62,6 +63,25 @@ public class ApiService {
                         .build())
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<EquipoDTO>>() {})
+                .block();
+    }
+    
+    // Obtener lista de ciudades (para el select)
+    public List<String> listarCiudades() {
+        return webClient.get()
+                .uri("/api/equipos/ciudades")
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<String>>() {})
+                .block();
+    }
+    
+    // Obtener lista de campeonatos (para el select)
+    public List<CampeonatoDTO> listarCampeonatos() {
+        return webClient.get()
+                .uri("/api/equipos/campeonatos")
+                .retrieve()
+                .bodyToFlux(CampeonatoDTO.class)
+                .collectList()
                 .block();
     }
 }
